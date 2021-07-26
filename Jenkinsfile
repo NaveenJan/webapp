@@ -12,16 +12,14 @@ pipeline {
             ''' 
             }
     }
-    
-     stage ('Check-Git-Secrets') {
+    stage ('Check-Git-Secrets') {
       steps {
         sh 'rm trufflehog || true'
         sh 'docker run cincan/trufflehog --json https://github.com/NaveenJan/webapp.git > trufflehog'
         sh 'cat trufflehog'
       }
     }
-    
-   stage ('Build') {
+    stage ('Build') {
       steps {
       sh 'mvn clean package'
        }
